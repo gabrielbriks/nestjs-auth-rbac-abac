@@ -10,11 +10,12 @@ Content-Type: application/json
 
 ### List Users
 GET http://localhost:3000/users
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTc0NDMyMTIxNywiZXhwIjoxNzQ0MzI4NDE3fQ.jEFR8-F-e166K6NJmFOmry2j97ew6XztGFb_RiRmm2A
 ### Get User By Id
 GET http://localhost:3000/users/cm9b88gsb00029dxwv5910hww
 
 ### Login
+# @name adminLogin
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
@@ -22,3 +23,21 @@ Content-Type: application/json
   "email": "admin@admin.com",
   "password": "admin"
 }
+
+### Get Token UserAdmin
+@tokenAdmin = {{adminLogin.response.body.access_token}}
+
+### Create Post
+POST http://localhost:3000/posts
+Content-Type:  application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "title": "First Post",
+  "content": "This is the content of my first post",
+  "published": true
+}
+
+### List Posts
+GET http://localhost:3000/posts
+Authorization: Bearer {{tokenAdmin}}
