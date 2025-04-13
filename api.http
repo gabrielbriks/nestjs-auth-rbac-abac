@@ -1,3 +1,5 @@
+
+### Create Admin
 POST http://localhost:3000/users
 Content-Type: application/json
 
@@ -6,6 +8,18 @@ Content-Type: application/json
   "email": "admin@admin.com",
   "password": "admin",
   "role": "ADMIN"
+}
+
+### Create Reader (precisa logar com o Admin)
+POST http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "name": "Reader",
+  "email": "reader@user.com",
+  "password": "reader",
+  "role": "READER"
 }
 
 ### List Users
@@ -27,10 +41,26 @@ Content-Type: application/json
 ### Get Token UserAdmin
 @tokenAdmin = {{adminLogin.response.body.access_token}}
 
+
+
+### Login READER
+# @name readerLogin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "reader@user.com",
+  "password": "reader"
+}
+
+### Get Token UserAdmin
+@tokenReader = {{readerLogin.response.body.access_token}}
+
+
 ### Create Post
 POST http://localhost:3000/posts
 Content-Type:  application/json
-Authorization: Bearer {{tokenAdmin}}
+Authorization: Bearer {{tokenReader}}
 
 {
   "title": "First Post",
