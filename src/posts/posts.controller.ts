@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -39,10 +40,16 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
-  @RequiredRoles(Roles.WRITER, Roles.EDITOR)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(id);
+  @RequiredRoles(Roles.WRITER, Roles.EDITOR, Roles.READER)
+  async findOne(@Param('id') id: string) {
+    const post = await this.postsService.findOne(id);
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return post;
   }
 
   @RequiredRoles(Roles.WRITER, Roles.EDITOR, Roles.ADMIN)

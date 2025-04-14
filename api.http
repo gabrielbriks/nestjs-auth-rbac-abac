@@ -43,7 +43,7 @@ Content-Type: application/json
 
 
 
-### Login READER
+### Login
 # @name readerLogin
 POST http://localhost:3000/auth/login
 Content-Type: application/json
@@ -60,14 +60,21 @@ Content-Type: application/json
 ### Create Post
 POST http://localhost:3000/posts
 Content-Type:  application/json
-Authorization: Bearer {{tokenReader}}
+Authorization: Bearer {{tokenAdmin}}
 
 {
   "title": "First Post",
   "content": "This is the content of my first post",
-  "published": true
+  "published": false
 }
 
 ### List Posts
 GET http://localhost:3000/posts
 Authorization: Bearer {{tokenAdmin}}
+
+### Get Post
+GET http://localhost:3000/posts/cm9gak2k100019d2qzauz081t
+Authorization: Bearer {{tokenReader}}
+
+
+2h43min
