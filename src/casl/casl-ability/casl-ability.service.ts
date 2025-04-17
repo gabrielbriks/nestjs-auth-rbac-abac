@@ -49,6 +49,12 @@ export class CaslAbilityService {
 
   createForUser(user: User) {
     const builder = new AbilityBuilder<AppAbility>(createPrismaAbility);
+
+    //@ts-expect-error permissionsWithForEach
+    user.permissions?.forEach((perm: any) => {
+      builder.can(perm.action, perm.resource, perm.condition);
+    });
+
     rolePermissionsMap[user.role](user, builder);
     this.ability = builder.build();
 

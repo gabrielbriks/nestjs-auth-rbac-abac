@@ -22,11 +22,38 @@ Authorization: Bearer {{tokenAdmin}}
   "role": "READER"
 }
 
+
+
+
+### ----------------------------------
+
+### Create Writer (precisa logar com o Admin)
+POST http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
+
+{
+  "name": "Writer",
+  "email": "writer@user.com",
+  "password": "writer",
+  "role": "WRITER",
+  "permissions": [
+    {
+      "action": "read",
+      "resource": "User"
+    }
+  ]
+}
+
 ### List Users
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTc0NDMyMTIxNywiZXhwIjoxNzQ0MzI4NDE3fQ.jEFR8-F-e166K6NJmFOmry2j97ew6XztGFb_RiRmm2A
+Authorization: {{tokenAdmin}}
+
+
 ### Get User By Id
 GET http://localhost:3000/users/cm9b88gsb00029dxwv5910hww
+
+
 
 ### Login
 # @name adminLogin
@@ -55,6 +82,27 @@ Content-Type: application/json
 
 ### Get Token UserAdmin
 @tokenReader = {{readerLogin.response.body.access_token}}
+
+
+
+
+
+###--------------------------------
+
+### Login Writer
+# @name writerLogin
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "writer@user.com",
+  "password": "writer"
+}
+
+### Get Token UserAdmin
+@tokenWriter = {{writerLogin.response.body.access_token}}
+
+
 
 
 ### Create Post

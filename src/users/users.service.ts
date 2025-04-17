@@ -1,3 +1,4 @@
+import { accessibleBy } from '@casl/prisma';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import bcrypt from 'bcrypt';
 import { CaslAbilityService } from 'src/casl/casl-ability/casl-ability.service';
@@ -30,11 +31,17 @@ export class UsersService {
   findAll() {
     const ability = this.abilityService.ability;
 
+    console.log('ability', ability);
+
     if (!ability.can('read', 'User')) {
       throw new UnauthorizedException();
     }
 
-    return this.prismaService.user.findMany();
+    return this.prismaService.user.findMany({
+      where: {
+        AND: [accessibleBy(ability, 'read').User],
+      },
+    });
   }
 
   findOne(id: string) {

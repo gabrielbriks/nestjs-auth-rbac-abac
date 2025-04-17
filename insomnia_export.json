@@ -1,0 +1,200 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-03-19T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_1",
+      "parentId": "fld_1",
+      "name": "Create Admin",
+      "url": "http://localhost:3000/users",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Admin\",\n  \"email\": \"admin@admin.com\",\n  \"password\": \"admin\",\n  \"role\": \"ADMIN\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_2",
+      "parentId": "fld_1",
+      "name": "Create Reader",
+      "url": "http://localhost:3000/users",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Reader\",\n  \"email\": \"reader@user.com\",\n  \"password\": \"reader\",\n  \"role\": \"READER\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_3",
+      "parentId": "fld_1",
+      "name": "Create Writer",
+      "url": "http://localhost:3000/users",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Writer\",\n  \"email\": \"writer@user.com\",\n  \"password\": \"writer\",\n  \"role\": \"WRITER\",\n  \"permissions\": [\n    {\n      \"action\": \"read\",\n      \"resource\": \"User\"\n    }\n  ]\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_4",
+      "parentId": "fld_1",
+      "name": "List Users",
+      "url": "http://localhost:3000/users",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_5",
+      "parentId": "fld_1",
+      "name": "Get User By Id",
+      "url": "http://localhost:3000/users/cm9b88gsb00029dxwv5910hww",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_6",
+      "parentId": "fld_1",
+      "name": "Login Admin",
+      "url": "http://localhost:3000/auth/login",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@admin.com\",\n  \"password\": \"admin\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_7",
+      "parentId": "fld_1",
+      "name": "Login Reader",
+      "url": "http://localhost:3000/auth/login",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"reader@user.com\",\n  \"password\": \"reader\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_8",
+      "parentId": "fld_1",
+      "name": "Login Writer",
+      "url": "http://localhost:3000/auth/login",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"writer@user.com\",\n  \"password\": \"writer\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_9",
+      "parentId": "fld_1",
+      "name": "Create Post",
+      "url": "http://localhost:3000/posts",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"First Post\",\n  \"content\": \"This is the content of my first post\",\n  \"published\": false\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_10",
+      "parentId": "fld_1",
+      "name": "List Posts",
+      "url": "http://localhost:3000/posts",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenAdmin}}"
+        }
+      ]
+    },
+    {
+      "_id": "req_11",
+      "parentId": "fld_1",
+      "name": "Get Post",
+      "url": "http://localhost:3000/posts/cm9gak2k100019d2qzauz081t",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{tokenReader}}"
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "_id": "env_1",
+    "name": "Base Environment",
+    "data": {
+      "tokenAdmin": "{{adminLogin.response.body.access_token}}",
+      "tokenReader": "{{readerLogin.response.body.access_token}}",
+      "tokenWriter": "{{writerLogin.response.body.access_token}}"
+    }
+  }
+}
