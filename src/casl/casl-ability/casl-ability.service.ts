@@ -50,6 +50,12 @@ export class CaslAbilityService {
   createForUser(user: User) {
     const builder = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
+    /**
+     * Utilizando abordagem de carregar as permissões para inserir no token. para nao ficar pegando toda vez do banco
+     * Claro, que deve ser levado em consideração o tando de permissões tem que ser avaliado o uso dessa pratica,
+     * visto que o payload é carregado em todas as requisições, podendo provocar latências e etc.
+     */
+
     //@ts-expect-error permissionsWithForEach
     user.permissions?.forEach((perm: any) => {
       builder.can(perm.action, perm.resource, perm.condition);

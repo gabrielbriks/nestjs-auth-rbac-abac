@@ -21,6 +21,73 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## 🚀 Projeto de Autenticação e Autorização em NestJS
+
+Este é um projeto de estudo que implementa um sistema completo de autenticação e autorização usando NestJS, Prisma e JWT. O objetivo é demonstrar práticas de segurança e controle de acesso em aplicações Node.js.
+
+### 📚 Anotações  
+
+As anoitações abaixo servem de apoio teórico de algumas abordagens, práticas e detalhes para consultas posteriormente. Estando disponivel na pasta `docs` e inclui:
+
+- [Autenticação](docs/authentication.md): Detalhes sobre o processo de autenticação usando JWT
+- [Guards](docs/guards.md): Implementação de guards para proteção de rotas
+- [Decorators](docs/decorators.md): Customização de decorators para controle de acesso
+- [Prisma com NestJS](docs/prisma-nestjs.md): Configuração e uso do Prisma como ORM
+
+### 🛠️ Tecnologias Utilizadas
+
+- **NestJS**: Framework Node.js para construção de aplicações escaláveis
+- **Prisma**: ORM moderno para banco de dados
+- **JWT**: Autenticação baseada em tokens
+- **PostgreSQL**: Banco de dados relacional
+- **CASL**: Biblioteca para controle de acesso baseado em políticas
+
+### 🔐 Funcionalidades
+
+- Autenticação com JWT
+- Controle de acesso baseado em roles (ADMIN, READER, EDITOR, WRITER)
+- Permissões granulares por recurso
+- CRUD de usuários e posts
+- Proteção de rotas com guards personalizados
+
+### 🚀 Como Executar
+
+```bash
+# Instalar dependências
+$ npm install
+
+# Configurar variáveis de ambiente
+$ cp .env.example .env
+
+# Executar migrações do Prisma
+$ npx prisma migrate dev
+
+# Iniciar o servidor em modo desenvolvimento
+$ npm run start:dev
+```
+
+### 📝 Testando a API
+
+A coleção de requisições para testar a API está disponível em `postman_collection.json`. Você pode importá-la no Postman, Insomnia ou HTTPie.
+
+### 🎯 Objetivos de Aprendizado
+
+- Implementação de autenticação JWT
+- Controle de acesso baseado em roles
+- Uso de guards e decorators
+- Integração com Prisma
+- Boas práticas de segurança
+
+### 📖 Recursos Adicionais
+
+- [Documentação NestJS](https://docs.nestjs.com)
+- [Documentação Prisma](https://www.prisma.io/docs)
+- [Documentação CASL](https://casl.js.org/v6/en/)
+
+### 📄 Licença
+
+Este projeto está sob a licença [MIT](LICENSE).
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
